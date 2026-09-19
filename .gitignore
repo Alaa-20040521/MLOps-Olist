@@ -40,3 +40,11 @@ mlruns/.trash/
 !mlruns/1/models/**/
 !mlruns/1/models/m-5720cfe2ef43432da79cc26c23ca413a/artifacts/
 !mlruns/1/models/m-5720cfe2ef43432da79cc26c23ca413a/artifacts/**/
+
+# Local generated datasets
+data/ml_orders.parquet
+data/train.parquet
+data/validation.parquet
+
+# Old local MLflow model artifact
+mlruns/1/models/m-51212bbd179c454fa365bddd273c5e15/
