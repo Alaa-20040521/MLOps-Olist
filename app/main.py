@@ -1,7 +1,10 @@
 from typing import List
+import time
 
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi import Request
+from src.utils.logging_config import logger
 
 from app.schemas import (
     BatchPredictionResponse,
@@ -43,6 +46,16 @@ def model_info():
         "threshold": predictor.threshold,
     }
 
+@app.get("/metrics")
+def metrics():
+    return {
+        "status": "operational",
+        "service": "olist-late-delivery-api",
+        "model_name": "olist-late-delivery-model",
+        "model_version": "1.0.0",
+        "model_alias": "champion",
+        "threshold": predictor.threshold,
+    }
 
 @app.post(
     "/predict",
@@ -114,3 +127,34 @@ def predict_batch(data: List[PredictionInput]):
             status_code=500,
             detail="Batch prediction failed.",
         ) from exc
+
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    start_time = time.perf_counter()
+
+    try:
+        response = await call_next(request)
+
+        duration_ms = (time.perf_counter() - start_time) * 1000
+
+        logger.info(
+            "HTTP request | method=%s | path=%s | status=%s | duration_ms=%.2f",
+            request.method,
+            request.url.path,
+            response.status_code,
+            duration_ms,
+        )
+
+        return response
+
+    except Exception:
+        duration_ms = (time.perf_counter() - start_time) * 1000
+
+        logger.exception(
+            "HTTP request failed | method=%s | path=%s | duration_ms=%.2f",
+            request.method,
+            request.url.path,
+            duration_ms,
+        )
+
+        raise

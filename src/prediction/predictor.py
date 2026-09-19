@@ -1,4 +1,5 @@
 from typing import Any
+from src.utils.logging_config import logger
 
 import pandas as pd
 
@@ -63,6 +64,14 @@ class Predictor:
         predictions = (
             probabilities >= self.threshold
         ).astype(int)
+        
+        logger.info(
+            "Prediction completed | rows=%d | threshold=%.4f | model_version=%s",
+            len(data),
+            self.threshold,
+            "1.0.0",
+        )
+
 
         return {
             "predictions": predictions.tolist(),
