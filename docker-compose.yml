@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: olist-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: olist
+      POSTGRES_USER: olist_user
+      POSTGRES_PASSWORD: olist_password
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./data:/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U olist_user -d olist"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: olist-api
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

@@ -1,0 +1,2 @@
+model,best_C,class_weight,primary_metric,validation_f1,test_accuracy,test_precision,test_recall,test_f1,test_roc_auc,test_average_precision
+Logistic Regression,1.0,balanced,f1,0.14444589820751014,0.34881149806522943,0.07988488637491317,0.8411703239289446,0.1459126336777234,0.612005933265836,0.10310365550187717

@@ -1,0 +1,30 @@
+project:
+  name: "olist-late-delivery-prediction"
+  version: "1.0.0"
+
+paths:
+  data_dir: "data"
+  features_dir: "data/features"
+  models_dir: "models"
+  logs_dir: "logs"
+
+  feature_list: "data/features/feature_list.txt"
+  preprocessor: "data/features/preprocessor.joblib"
+
+  model: "models/xgboost/xgboost_late_delivery_model.joblib"
+  threshold: "models/xgboost/xgboost_threshold.joblib"
+
+model:
+  name: "xgboost_late_delivery"
+  version: "1.0.0"
+
+prediction:
+  threshold: 0.55
+
+logging:
+  level: "INFO"
+  file: "logs/app.log"
+
+api:
+  host: "0.0.0.0"
+  port: 8000

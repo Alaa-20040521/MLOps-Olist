@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Logs
+logs/
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Local MLflow tracking files
+mlruns/*/*/artifacts/model_artifacts/
+mlruns/*/*/meta.yaml
+mlruns/*/*/metrics/
+mlruns/*/*/params/
+mlruns/*/*/tags/
+
+# MLflow temporary files
+mlruns/.trash/
+
+# Local generated files
+*.tmp
+*.bak
+
+# Keep the registered model artifact used by inference
+!mlruns/1/models/
+!mlruns/1/models/**/
+!mlruns/1/models/m-5720cfe2ef43432da79cc26c23ca413a/artifacts/
+!mlruns/1/models/m-5720cfe2ef43432da79cc26c23ca413a/artifacts/**/

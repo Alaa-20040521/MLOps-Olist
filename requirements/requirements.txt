@@ -1,0 +1,12 @@
+numpy==2.2.6
+scipy==1.15.3
+pandas==2.2.3
+scikit-learn==1.7.2
+xgboost==3.2.0
+joblib==1.6.0
+PyYAML==6.0.3
+
+fastapi==0.141.1
+uvicorn==0.53.0
+mlflow==3.16.1
+great_expectations==1.23.0
